@@ -1,43 +1,74 @@
+
 var saveCanvas;
-let d = 400;
+
+
 let a = 0;
-let c = 50;
+
 function preload() {
 
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight)
-  saveCanvas = createGraphics(400, 600);
+  saveCanvas = createGraphics(600, 600);
   angleMode(DEGREES)
-  fill(255);
+  background("#F8F8FF");
+  noFill();
+  strokeWeight(2);
+  stroke("#DCDCDC");
 
-  rect(0, 0, 200, 200)
-  button = createButton('click me');
-  button.position(300, 0);
-  button.mousePressed(changeStroke);
+  rect(20, 20, 200, 200)
 
+  //button = createButton('click me');
+  button2 = createButton('save');
+  //button.position(300, 0);
+  button2.position(300, 100);
 
-  function changeStroke() {
-    let val = random(255, 255, 255);
-    stroke(val);
+  fill("#5F9EA0")
+  //button.mousePressed(changeStroke);
+//  function changeStroke() {
+    //Big(options2);
+  //}
+  button2.mousePressed(printtext);
+
+  function printtext() {
+
+    let c = get(width / 9, height / 4.3, width, height);
+    saveCanvas.image(c, 0, 0);
+    save(saveCanvas, frameCount + ".png");
+
   }
 }
 
 function draw() {
+  let Z = mouseX;
+  let K = mouseY;
 
 
 
-  for (let x = a; x < width; x += d) {
-    for (let y = d-150; y < width; y += d) {
+  if (mouseIsPressed === true && Z > 20 && Z < 220 && K > 20 && K < 220) {
+
+    strokeWeight(1)
+
+    line(mouseX, mouseY, pmouseX, pmouseY)
+  }
+Big();
+
+}
+
+function Big (){
+  let d = windowWidth / 6;
+  scale(0.7)
+  for (let x = a - windowWidth / 24; x < width * 2; x += d) {
+    for (let y = d; y < width * 2; y += d) {
 
 
       let Z = mouseX;
       let K = mouseY;
 
 
-      if (mouseIsPressed === true && Z < 200 && K < 200) {
-
+      if (mouseIsPressed === true && Z > 20 && Z < 220 && K > 20 && K < 220) {
+        stroke("#5F9EA0");
         strokeWeight(noise(frameCount / 20) * 20)
 
         line(mouseX + x, mouseY + y, pmouseX + x, pmouseY + y)
@@ -50,17 +81,18 @@ function draw() {
       }
     }
   }
+
   scale(2)
-  for (let x = c; x < width; x += d/2) {
-    for (let y = d/2; y < width; y += d/2) {
+  for (let x = a - windowWidth / 12; x < width; x += d / 2) {
+    for (let y = d / 1.7; y < width; y += d / 2) {
 
 
       let Z = mouseX;
       let K = mouseY;
 
 
-      if (mouseIsPressed === true && Z < 200 && K < 200) {
-
+      if (mouseIsPressed === true && Z > 20 && Z < 220 && K > 20 && K < 220) {
+stroke("#483D8B");
         strokeWeight(noise(frameCount / 20) * 15)
 
         line(mouseX + x, mouseY + y, pmouseX + x, pmouseY + y)
@@ -72,14 +104,6 @@ function draw() {
         ;
       }
     }
-  }
-}
-
-function keyPressed() {
-  if (key == 's') {
-    let c = get(width / 2 - height / 2, 0, height, height);
-    saveCanvas.image(c, 0, 0);
-    save(saveCanvas, frameCount + ".png");
   }
 }
 
